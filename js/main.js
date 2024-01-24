@@ -8,7 +8,7 @@ const open = "open";
 const active = "active";
 const modalOpen = "[data-open]";
 const modalClose = "[data-close]";
-const isVisible = ".is-visible";
+const isVisible = "is-visible";
 const dataFilter = "[data-filter]";
 const portFolioData = "[data-item]";
 const root = document.documentElement;
@@ -18,19 +18,18 @@ const switcher = document.querySelectorAll(switcherBtn);
 const currentTheme = localStorage.getItem(theme);
 /*portfolio */
 const filterLink = document.querySelectorAll(dataFilter);
-const portfolioItems = document.querySelectorAll(portfolioData);
+const portfolioItems = document.querySelectorAll(portFolioData);
 const searchBox = document.querySelector("#search");
 //modal
 const openModal = document.querySelectorAll(modalOpen);
 const closeModal = document.querySelectorAll(modalClose);
 
-const seActive = (elm, selector) => {
+const setActive = (elm, selector) => {
   if (document.querySelector(`${selector}.${active}`) !== null) {
     document.querySelector(`${selector}.${active}`).classList.remove(active);
   }
   elm.classList.add(active);
 };
-
 const setTheme = (val) => {
   if (val == dark) {
     root.setAttribute(dataTheme, dark);
@@ -91,29 +90,24 @@ for (const link of filterLink) {
       } else if (card.dataset.item === filter) {
         card.style.display = "block";
       } else {
-        card.style.display = " none";
+        card.style.display = "none";
       }
     });
   });
 }
-
 //modal/full site modal 'open buttons'
-
 for (const elm of openModal) {
   elm.addEventListener("click", function () {
     const modalId = this.dataset.open;
     document.getElementById(modalId).classList.add(isVisible);
   });
 }
-
 for (const elm of closeModal) {
   elm.addEventListener("click", function () {
     this.parentElement.parentElement.parentElement.classList.remove(isVisible);
   });
 }
-
 //modal
-
 document.addEventListener("click", (e) => {
   // console.log(e.target, document.querySelector(".modal.is-visible"));
   if (e.target === document.querySelector(".modal.is-visible")) {
@@ -131,6 +125,7 @@ document.addEventListener("keyup", (e) => {
 const elmsDisplayed = getComputedStyle(root).getPropertyValue(
   "--marquee-elms-displayed"
 );
+
 const marqueeContent = document.querySelector("ul.marquee-content");
 
 root.style.setProperty("--marquee-elms", marqueeContent.children.length);

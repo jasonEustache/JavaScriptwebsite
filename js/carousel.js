@@ -48,7 +48,7 @@ const goToPrev = () =>
 
 for (let i = 0; i < buttons.length; i += 1) {
   buttons[i].addEventListener("click", () => {
-    i === 0 ? gotToPrev() : goToNext();
+    i === 0 ? goToPrev() : goToNext();
   });
 }
 
